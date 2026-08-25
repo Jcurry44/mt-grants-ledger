@@ -1119,6 +1119,8 @@ select {
   .foot { background: #fff; color: var(--ink-dim); border-top: 2px solid var(--ink); }
   a { color: var(--ink); text-decoration: none; }
 }
+.grant-table th:nth-child(4),.grant-table td:nth-child(4){display:none}.gc-p{display:none}
+.grant-table th:nth-child(5),.grant-table td:nth-child(5){display:none}.gc-l{display:none}
 </style>
 </head>
 <body>
@@ -1175,7 +1177,7 @@ select {
         <p class="hero-cred">An independent presentation by <a href="https://jcurry44.github.io/" target="_blank" rel="noopener">Curry Studio</a> — not affiliated with or endorsed by the foundation.</p>
       </div>
       <div class="grand">
-        <div class="g-label">Awarded · one filed year</div>
+        <div class="g-label">Awarded · one filed years</div>
         <div class="g-val" id="kpi-total">$41,009,568</div>
         <div class="g-rule" aria-hidden="true"></div>
         <div class="g-sub"><span class="tick">✓</span> 3105 grants paid out · sum equals the filed totals, every year</div>
@@ -1332,7 +1334,7 @@ select {
           <div class="lt-row">
             <label class="sr-only" for="q">Search grants</label>
             <div class="q-wrap">
-              <input type="search" id="q" placeholder="Search recipient, purpose, or place…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
+              <input type="search" id="q" placeholder="Search recipients…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="q-suggest">
               <div class="q-suggest" id="q-suggest" role="listbox" aria-label="Search suggestions" hidden></div>
             </div>
             <label class="sr-only" for="sort">Sort</label>
@@ -1391,7 +1393,7 @@ select {
             <button type="button" id="next-page">Next</button>
           </div>
         </div>
-        <p class="mini-note">Location is the recipient’s mailing address as filed — not a service area. Every row carries its IRS object ID in the CSV export.</p>
+        <p class="mini-note">The filed attachment lists recipient and amount only — no purpose or location fields exist in the source, so none are shown. Every row carries its source reference in the CSV export.</p>
       </div>
     </section>
 
@@ -1407,7 +1409,7 @@ select {
         </p>
         <div class="tie-cards" id="tie-cards"></div>
         <h3>This ledger was read from a scan</h3>
-        <p>Every other ledger in this collection is built from the machine-readable XML the foundation e-filed. This one could not be: M&amp;T’s return reports its entire year of grantmaking as a single line — “See attached statement” — and the 3,105 individual grants live only in an attachment the IRS publishes as a scanned image, with no text layer at all.</p><p>So the rows here were read off that scan by optical character recognition, page by page, and then judged by the same referee as every other year in this collection: the recovered rows must sum to Part I, line 25(d) of the filing. They do, exactly — 3,105 grants totaling $41,009,568, matching both the statement’s own printed total and the filed line, to the dollar. Three recipient names were too faint to read and are shown as unread rather than guessed; their amounts are included, because the amounts are what the total proves.</p><p>Only tax year 2023 appears here. The 2022 scan recovers 99.98% of its total and is $7,640 short — close, but a year that does not reconcile exactly is not published.</p>
+        <p>Every other ledger in this collection is built from the machine-readable XML the foundation e-filed. This one could not be: M&amp;T’s return reports its entire year of grantmaking as a single line — “See attached statement” — and the 3,105 individual grants live only in an attachment the IRS publishes as a scanned image, with no text layer at all.</p><p>So the rows here were read off that scan by optical character recognition, page by page, and then judged by the same referee as every other year in this collection: the recovered rows must sum to Part I, line 25(d) of the filing. They do, exactly — 3,105 grants totaling $41,009,568, matching both the statement’s own printed total and the filed line, to the dollar. Three recipient names were too faint to read and are shown as unread rather than guessed; their amounts are included, because the amounts are what the total proves.</p><p>Only tax year 2023 appears here. The 2022 scan recovers 99.98% of its total and is $7,640 short — close, but a year that does not reconcile exactly is not published.</p><p>One consequence of a name-and-amount source: the purpose groupings on this page are read entirely from recipients’ filed names — there is no purpose text to read. The rule table below is the complete vocabulary used, and roughly half the dollars stay in “other” rather than being guessed.</p>
         <h3>Source</h3>
         <p>
           IRS TEOS public 990-PF e-file XML for EIN <code>16-1448017</code> —
@@ -1611,15 +1613,15 @@ window.MT_DATA={"meta":{"foundation":"M&amp;T Charitable Foundation","ein":"16-1
   const CAT_OTHER = 'Other filed purposes';
   const CAT_SUBJECTS = [
     { key: 'Education & youth',
-      kw: 'SCHOLARSHIP|\\bSCHOOL|ACADEM|COLLEGE|\\bEDUCATION|STUDENT|\\bYOUTH\\b|\\bSTEM\\b|TEACHER|SAY YES|MENTOR|EARLY CHILDHOOD|LITERACY|K-12|K-8|PRE-K|PRESCHOOL|CLASSROOM|TUTORING|AFTER[- ]?SCHOOL|\\bLEARNING\\b|CHILD ?CARE|CITY YEAR|BOYS AND MEN OF COLOR|\\bPREP\\b|BOYS & GIRLS CLUB|BOYS AND GIRLS CLUB' },
+      kw: 'UNIVERSITY|\\bLIBRAR|BIG BROTHERS|BIG SISTERS|\\bSCOUTS?\\b|HEAD START|SCHOLARSHIP|\\bSCHOOL|ACADEM|COLLEGE|\\bEDUCATION|STUDENT|\\bYOUTH\\b|\\bSTEM\\b|TEACHER|SAY YES|MENTOR|EARLY CHILDHOOD|LITERACY|K-12|K-8|PRE-K|PRESCHOOL|CLASSROOM|TUTORING|AFTER[- ]?SCHOOL|\\bLEARNING\\b|CHILD ?CARE|CITY YEAR|BOYS AND MEN OF COLOR|\\bPREP\\b|BOYS & GIRLS CLUB|BOYS AND GIRLS CLUB' },
     { key: 'Health & wellbeing',
-      kw: '\\bHEALTHY?\\b|HOSPITAL|MEDICAL|\\bMRI\\b|PATIENT|CANCER|HOSPICE|BEHAVIORAL|MENTAL|WELLNESS|NURSING|CLINIC|RECOVERY RESIDENCE|RECOVERY CENTER|ADDICTION|AUTISM|DISABILIT|RESPITE|CAREGIVER|\\bBLIND\\b|\\bDEAF\\b|THERAPEUT|\\bTRAUMA\\b|EMERGENCY DEPARTMENT|PSYCHIATR|WRAPAROUND' },
+      kw: '\\bYMCA\\b|\\bYWCA\\b|JEWISH COMMUNITY CENTER|\\bJCC\\b|VISITING NURSE|\\bVNA\\b|RONALD MCDONALD|\\bAGING\\b|OLDER ADULT|\\bSENIORS?\\b|\\bELDER|SPECIAL OLYMPICS|\\bHEALTHY?\\b|HOSPITAL|MEDICAL|\\bMRI\\b|PATIENT|CANCER|HOSPICE|BEHAVIORAL|MENTAL|WELLNESS|NURSING|CLINIC|RECOVERY RESIDENCE|RECOVERY CENTER|ADDICTION|AUTISM|DISABILIT|RESPITE|CAREGIVER|\\bBLIND\\b|\\bDEAF\\b|THERAPEUT|\\bTRAUMA\\b|EMERGENCY DEPARTMENT|PSYCHIATR|WRAPAROUND' },
     { key: 'Basic needs & response',
-      kw: 'BASIC HUMAN NEEDS|\\bFOOD\\b|HUNGER|\\bMEALS?\\b|HOUSING|HOMELESS|SHELTER|SAFETY[- ]?NET|POVERTY|REFUGEE|COVID|EMERGENCY|\\bRELIEF\\b|RESPONSE FUND|DISASTER|CRISIS|CHILD ADVOCACY|DOMESTIC VIOLENCE|VETERAN|BUFFALO TOGETHER FUND|\\bPANTR' },
+      kw: 'UNITED WAY|\\bHABITAT\\b|SALVATION ARMY|RESCUE MISSION|GOSPEL MISSION|CITY MISSION|CATHOLIC CHARITIES|JEWISH FEDERATION|JEWISH FAMILY SERVICE|LEGAL AID|LEGAL SERVICES|VOLUNTEER LAWYERS|AMBULANCE|RESCUE SQUAD|FIRE DEPARTMENT|FIRE COMPANY|\\bFIRE CO\\b|FIRST RESPONDER|RED CROSS|COMMUNITY ACTION|CREDIT COUNSELING|BASIC HUMAN NEEDS|\\bFOOD\\b|HUNGER|\\bMEALS?\\b|HOUSING|HOMELESS|SHELTER|SAFETY[- ]?NET|POVERTY|REFUGEE|COVID|EMERGENCY|\\bRELIEF\\b|RESPONSE FUND|DISASTER|CRISIS|CHILD ADVOCACY|DOMESTIC VIOLENCE|VETERAN|BUFFALO TOGETHER FUND|\\bPANTR' },
     { key: 'Arts & culture',
-      kw: '\\bARTS?\\b|\\bMUSIC\\b|THEATRE|THEATER|MUSEUM|CULTURAL|HERITAGE|ORCHESTRA|PHILHARMONIC|GALLERY|\\bFILM\\b|\\bDANCE\\b|\\bOPERAS?\\b|EXHIBIT|ARTIST|BOTANICAL|\\bZOO\\b|AQUARIUM|BROADCASTING|HISTORY|HISTORIC' },
+      kw: 'SYMPHONY|\\bBALLET\\b|\\bCHOIR\\b|CHORALE|\\bCHORUS\\b|CONSERVATORY|\\bJAZZ\\b|\\bARTS?\\b|\\bMUSIC\\b|THEATRE|THEATER|MUSEUM|CULTURAL|HERITAGE|ORCHESTRA|PHILHARMONIC|GALLERY|\\bFILM\\b|\\bDANCE\\b|\\bOPERAS?\\b|EXHIBIT|ARTIST|BOTANICAL|\\bZOO\\b|AQUARIUM|BROADCASTING|HISTORY|HISTORIC' },
     { key: 'Community & economic development',
-      kw: 'ECONOMIC|REVITALIZ|NEIGHBORHOOD|WORKFORCE|ENTREPRENEUR|SMALL BUSINESS|CORRIDOR|MOBILITY|\\bJOBS?\\b|EMPLOYMENT|COMMUNITY DEVELOPMENT|MAIN STREET|\\bPARKS?\\b|GARDEN|PLAYGROUND|WATERFRONT|CIVIC|DIGITAL DIVIDE|BROADBAND|TRANSPORTATION|\\bTRAINING\\b|INCUBATOR|TOURISM|OPEN4' },
+      kw: 'CHAMBER OF COMMERCE|COMMUNITY FOUNDATION|COMMUNITY CENTER|URBAN LEAGUE|GOODWILL|LAND BANK|ROTARY|\\bKIWANIS\\b|\\bLIONS CLUB\\b|ECONOMIC|REVITALIZ|NEIGHBORHOOD|WORKFORCE|ENTREPRENEUR|SMALL BUSINESS|CORRIDOR|MOBILITY|\\bJOBS?\\b|EMPLOYMENT|COMMUNITY DEVELOPMENT|MAIN STREET|\\bPARKS?\\b|GARDEN|PLAYGROUND|WATERFRONT|CIVIC|DIGITAL DIVIDE|BROADBAND|TRANSPORTATION|\\bTRAINING\\b|INCUBATOR|TOURISM|OPEN4' },
     { key: 'Nonprofit capacity & transitions',
       kw: 'CAPACITY|TRANSITION FUND|NONPROFIT SUPPORT|MERGER|AFFILIATION|SHARED SPACE|SHARED SERVICES|COLLABORATIVE|BACK[- ]?OFFICE|STRATEGIC PLAN|TECHNICAL ASSISTANCE|LEADERSHIP DEVELOPMENT|ACCOUNTING' }
   ];
